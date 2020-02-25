@@ -41,21 +41,15 @@ fi
 echo
 echo "Running command '${oryxCommand}'"
 
-url="https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}/jobs"
-
-json=$(curl -X GET "${url}")
-
-#Extracts substring starting with '/appservice-build@'
-#Then gets startTime and endTime within the first step.
-startTime=${json#*Build*/appservice-build@*,}
-startTime=$(echo "${startTime}"| sed 's/,/\n/g' | grep "started_at" | awk '{print $2}' | sed -n '1p')
-endTime=${json#*Build*/appservice-build@*,}
-endTime=$(echo "${endTime}" | sed 's/,/\n/g' | grep "completed_at" | awk '{print $2}' | sed -n '1p')
-
-echo "The start time of action build is ${startTime}."
-echo "The end time of action build is ${endTime}."
-
-export GITHUB_ACTIONS_BUILD_START_TIME=$startTime
-export GITHUB_ACTIONS_BUILD_END_TIME=$endTime
+if [ -z "$ORYX_DISABLE_TELEMETRY" ] || [ "$ORYX_DISABLE_TELEMETRY" == "false" ]; then
+    url="https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}/jobs"
+    json=$(curl -X GET "${url}")
+    startTime=${json#*Build*/appservice-build@*,}
+    startTime=$(echo "${startTime}"| sed 's/,/\n/g' | grep "started_at" | awk '{print $2}' | sed -n '1p')
+    endTime=${json#*Build*/appservice-build@*,}
+    endTime=$(echo "${endTime}" | sed 's/,/\n/g' | grep "completed_at" | awk '{print $2}' | sed -n '1p')
+    export GITHUB_ACTIONS_BUILD_IMAGE_PULL_START_TIME=$startTime
+    export GITHUB_ACTIONS_BUILD_IMAGE_PULL_END_TIME=$endTime
+fi
 
 eval $oryxCommand
