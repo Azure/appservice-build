@@ -53,4 +53,5 @@ if [ -z "$ORYX_DISABLE_TELEMETRY" ] || [ "$ORYX_DISABLE_TELEMETRY" == "false" ];
 fi
 
 export ORYX_SDK_STORAGE_BASE_URL="https://oryxsdksdev.blob.core.windows.net"
+oryxCommand="${oryxCommand} --enable-dynamic-install"
 eval $oryxCommand
