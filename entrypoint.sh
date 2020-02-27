@@ -16,7 +16,7 @@ else
 fi
 
 echo
-oryxCommand="oryx build ${sourceDirectory}"
+oryxCommand="oryx build ${sourceDirectory}/src -i /tmp/int -o ${sourceDirectory}/out"
 
 echo
 
