@@ -52,4 +52,6 @@ if [ -z "$ORYX_DISABLE_TELEMETRY" ] || [ "$ORYX_DISABLE_TELEMETRY" == "false" ];
     export GITHUB_ACTIONS_BUILD_IMAGE_PULL_END_TIME=$endTime
 fi
 
+oryxCommand="${oryxCommand} --enable-dynamic-install"
+
 eval $oryxCommand
