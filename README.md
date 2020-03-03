@@ -98,7 +98,7 @@ To disable this GitHub Action from collecting any data, please set the environme
 ```
 
 ## Building sample apps with this githu action
-![](https://github.com/actions/hello-world/workflows/.github/workflows/main.yml/badge.svg)
+![](https://github.com/microsoft/oryx/workflows/.github/workflows/sample-apps-with-v2-beta.yml/badge.svg)
 
 # Contributing
 
