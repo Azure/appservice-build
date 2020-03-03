@@ -97,6 +97,9 @@ To disable this GitHub Action from collecting any data, please set the environme
     ORYX_DISABLE_TELEMETRY: true
 ```
 
+## Building sample apps with this githu action
+![](https://github.com/actions/hello-world/workflows/.github/workflows/main.yml/badge.svg)
+
 # Contributing
 
 For more information on contributing to this project, please see the [`CONTRIBUTING.md`](./CONTRIBUTING.md) file.
