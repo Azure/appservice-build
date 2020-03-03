@@ -97,9 +97,6 @@ To disable this GitHub Action from collecting any data, please set the environme
     ORYX_DISABLE_TELEMETRY: true
 ```
 
-## Building sample apps with this githu action
-![](https://github.com/microsoft/oryx/workflows/.github/workflows/sample-apps-with-v2-beta.yml/badge.svg?branch=actions/kichalla/use.github.actions)
-
 # Contributing
 
 For more information on contributing to this project, please see the [`CONTRIBUTING.md`](./CONTRIBUTING.md) file.
