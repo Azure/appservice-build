@@ -5,7 +5,6 @@ platform=$2
 platformVersion=$3
 
 echo
-
 if [ -n "${sourceDirectory}" ]
 then
     sourceDirectory="$PWD/$sourceDirectory"
@@ -16,8 +15,9 @@ else
 fi
 
 echo
-oryxCommand="oryx build ${sourceDirectory}"
-
+mkdir -p /tmp/oryx/platform
+mkdir -p ${sourceDirectory}/out
+oryxCommand="oryx build ${sourceDirectory} -i /tmp/oryx/platform -o ${sourceDirectory}/out"
 echo
 
 if [ -n "${platform}" ]
@@ -38,6 +38,8 @@ else
     echo "No platform version provided -- Oryx will determine the version."
 fi
 
+oryxCommand="${oryxCommand} --enable-dynamic-install"
+
 echo
 echo "Running command '${oryxCommand}'"
 
@@ -51,7 +53,5 @@ if [ -z "$ORYX_DISABLE_TELEMETRY" ] || [ "$ORYX_DISABLE_TELEMETRY" == "false" ];
     export GITHUB_ACTIONS_BUILD_IMAGE_PULL_START_TIME=$startTime
     export GITHUB_ACTIONS_BUILD_IMAGE_PULL_END_TIME=$endTime
 fi
-
-oryxCommand="${oryxCommand} --enable-dynamic-install"
 
 eval $oryxCommand
