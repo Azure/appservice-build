@@ -6,10 +6,10 @@ Get started today with a [free Azure account](https://azure.com/free/open-source
 
 This repository contains the GitHub Action for [building Azure Web Apps on Linux](./action.yml) using the [Oryx](https://github.com/microsoft/Oryx) build system. Currently, the following platforms can be built using this GitHub Action:
 
-- .NET Core
 - Node
-- PHP
 - Python
+
+**Note:** Currently you can only use platform versions which are supported by [Azure Web Apps](https://azure.microsoft.com/en-us/services/app-service/web/). 
 
 If you are looking for a GitHub Action to deploy your Azure Web App, consider using [`azure/webapps-deploy`](https://github.com/Azure/webapps-deploy).
 
