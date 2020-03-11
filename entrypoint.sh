@@ -1,5 +1,5 @@
 #!/bin/bash
-set -ex
+set -e
 
 checkArg() {
     # Check if the input has content and is not just whitepsace or is empty
