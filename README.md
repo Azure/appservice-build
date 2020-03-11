@@ -15,8 +15,10 @@ If you are looking for a GitHub Action to deploy your Azure Web App, consider us
 
 The definition of this GitHub Action is in [`action.yml`](./action.yml).
 
-Now we have a beta version [`v2`](https://github.com/Azure/appservice-build/tree/v2) released. It's using a [`new image specifically for GitHub Actions`](https://github.com/microsoft/Oryx/blob/master/images/build/GitHubActions.Dockerfile
-) to significantly reduce the time for building your app.
+Now we have a beta version [`v2`](https://github.com/Azure/appservice-build/tree/v2) released. 
+- It's using a [`new image specifically for GitHub Actions`](https://github.com/microsoft/Oryx/blob/master/images/build/GitHubActions.Dockerfile
+) to significantly reduce the time to pull the image.
+- [Azure CDN](https://azure.microsoft.com/en-us/services/cdn/) is implemented within beta version to fasten the time to download SDKs.
 
 # End-to-End Sample Workflows
 

@@ -38,6 +38,7 @@ else
     echo "No platform version provided -- Oryx will determine the version."
 fi
 
+oryxCommand="${oryxCommand} --enable-dynamic-install"
 echo
 echo "Running command '${oryxCommand}'"
 
@@ -52,6 +53,6 @@ if [ -z "$ORYX_DISABLE_TELEMETRY" ] || [ "$ORYX_DISABLE_TELEMETRY" == "false" ];
     export GITHUB_ACTIONS_BUILD_IMAGE_PULL_END_TIME=$endTime
 fi
 
-oryxCommand="${oryxCommand} --enable-dynamic-install"
+export ORYX_SDK_STORAGE_BASE_URL="https://oryxsdk-cdn.azureedge.net"
 
 eval $oryxCommand
