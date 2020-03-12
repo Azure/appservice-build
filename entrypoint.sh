@@ -36,16 +36,19 @@ then
     echo "No source directory was provided -- the root of the repository ('GITHUB_WORKSPACE' environment variable) will be built: '${sourceDirectory}'"
 else
     sourceDirectory=$(getAbsolutePath "$sourceDirectory")
-    echo "Relative path to source directory was provided -- the following directory will be built: '${sourceDirectory}'"
+    echo "Source directory was provided. Following directory will be built: '${sourceDirectory}'"
 fi
 
 echo
 oryxCommand="oryx build $sourceDirectory"
 
-if [ ! -z "$outputDirectory" ]
+if [ -z "$outputDirectory" ]
 then
+    echo "No output directory was provided"
+else
     outputDirectory=$(getAbsolutePath "$outputDirectory")
     oryxCommand="$oryxCommand -o $outputDirectory"
+    echo "Output directory was provided: '${outputDirectory}'"
 fi
 
 echo
@@ -78,6 +81,8 @@ if [ -z "$ORYX_DISABLE_TELEMETRY" ] || [ "$ORYX_DISABLE_TELEMETRY" == "false" ];
     export GITHUB_ACTIONS_BUILD_IMAGE_PULL_START_TIME=$startTime
     export GITHUB_ACTIONS_BUILD_IMAGE_PULL_END_TIME=$endTime
 fi
+
+export ORYX_SDK_STORAGE_BASE_URL="https://oryxsdk-cdn.azureedge.net"
 
 echo
 echo "Running command '${oryxCommand}'"
