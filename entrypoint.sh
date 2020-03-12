@@ -4,8 +4,8 @@ set -e
 checkArg() {
     # Check if the input has content and is not just whitepsace or is empty
     case $1 in
-    (*[![:blank:]]*) echo "$1";;
-    (*) echo ""
+        (*[![:blank:]]*) echo "$1";;
+        (*) echo ""
     esac
 }
 
@@ -19,8 +19,8 @@ getAbsolutePath(){
     # Check if the path is relative or absolute.
     # If relative path is given, create an absolute path
     case $path in
-    /*) echo $path ;;
-    *) echo "$PWD/$path" ;;
+        /*) echo $path ;;
+        *) echo "$PWD/$path" ;;
     esac
 }
 
@@ -33,13 +33,12 @@ echo
 if [ -z "$sourceDirectory" ]
 then
     sourceDirectory="$PWD"
-    echo "No source directory was provided -- the root of the repository ('GITHUB_WORKSPACE' environment variable) will be built: '${sourceDirectory}'"
+    echo "No source directory was provided -- the root of the repository ('GITHUB_WORKSPACE' environment variable) will be built: '$sourceDirectory'"
 else
     sourceDirectory=$(getAbsolutePath "$sourceDirectory")
-    echo "Source directory was provided. Following directory will be built: '${sourceDirectory}'"
+    echo "Source directory was provided. Following directory will be built: '$sourceDirectory'"
 fi
 
-echo
 oryxCommand="oryx build $sourceDirectory"
 
 if [ -z "$outputDirectory" ]
@@ -48,10 +47,9 @@ then
 else
     outputDirectory=$(getAbsolutePath "$outputDirectory")
     oryxCommand="$oryxCommand -o $outputDirectory"
-    echo "Output directory was provided: '${outputDirectory}'"
+    echo "Output directory was provided: '$outputDirectory'"
 fi
 
-echo
 if [ -z "$platform" ]
 then
     echo "No platform provided -- Oryx will enumerate the source directory to determine the platform."
@@ -60,7 +58,6 @@ else
     oryxCommand="$oryxCommand --platform $platform"
 fi
 
-echo
 if [ -z "$platformVersion" ]
 then
     echo "No platform version provided -- Oryx will determine the version."
@@ -85,5 +82,5 @@ fi
 export ORYX_SDK_STORAGE_BASE_URL="https://oryxsdk-cdn.azureedge.net"
 
 echo
-echo "Running command '${oryxCommand}'"
+echo "Running command '$oryxCommand'"
 eval $oryxCommand
