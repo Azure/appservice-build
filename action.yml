@@ -10,6 +10,9 @@ inputs:
   platform-version:
     description: 'Version of the programming platform used to build the web app; if no value is provided, Oryx will determine the version needed to build the repository.'
     required: false
+  output-directory:
+    description: 'The directory where the build output has to be put.'
+    required: false
 branding:
   icon: 'login.svg'
   color: 'blue'
@@ -20,3 +23,4 @@ runs:
     - ${{ inputs.source-directory }}
     - ${{ inputs.platform }}
     - ${{ inputs.platform-version }}
+    - ${{ inputs.output-directory }}
