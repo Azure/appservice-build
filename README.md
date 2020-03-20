@@ -1,5 +1,13 @@
 # GitHub Action for building Azure Web Apps
 
+![V1_BuildAndDeploy_PythonApp_ToAzureWebApp](https://github.com/MicrosoftOryx/githubactions-samples/workflows/V1_BuildAndDeploy_PythonApp_ToAzureWebApp/badge.svg?branch=master)
+![V1_BuildAndDeploy_PhpApp_ToAzureWebApp](https://github.com/MicrosoftOryx/githubactions-samples/workflows/V1_BuildAndDeploy_PhpApp_ToAzureWebApp/badge.svg?branch=master)
+![V1_BuildAndDeploy_NodeApp_ToAzureWebApp](https://github.com/MicrosoftOryx/githubactions-samples/workflows/V1_BuildAndDeploy_NodeApp_ToAzureWebApp/badge.svg?branch=master)
+![V1_BuildAndDeploy_AspNetCoreApp_ToAzureWebApp](https://github.com/MicrosoftOryx/githubactions-samples/workflows/V1_BuildAndDeploy_AspNetCoreApp_ToAzureWebApp/badge.svg?branch=master)
+![V2Beta_BuildAndDeploy_PythonApp_ToAzureWebApp](https://github.com/MicrosoftOryx/githubactions-samples/workflows/V2Beta_BuildAndDeploy_PythonApp_ToAzureWebApp/badge.svg?branch=master)
+![V2Beta_BuildAndDeploy_NodeApp_ToAzureWebApp](https://github.com/MicrosoftOryx/githubactions-samples/workflows/V2Beta_BuildAndDeploy_NodeApp_ToAzureWebApp/badge.svg?branch=master)
+![V2Beta_BuildAndDeploy_AspNetCoreApp_ToAzureWebApp](https://github.com/MicrosoftOryx/githubactions-samples/workflows/V2Beta_BuildAndDeploy_AspNetCoreApp_ToAzureWebApp/badge.svg?branch=master)
+
 With the Azure App Service Actions for GitHub, you can automate your workflow to deploy [Azure Web Apps](https://azure.microsoft.com/en-us/services/app-service/web/) using GitHub Actions.
 
 Get started today with a [free Azure account](https://azure.com/free/open-source)!
