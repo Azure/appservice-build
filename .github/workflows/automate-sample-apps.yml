@@ -2,9 +2,9 @@ name: Trigger a repository dispatch event to sample apps repo to run apps
 
 on:
   push:
-    branches: [ master ]
+    branches: [ master, v1, v2-beta ]
   pull_request:
-    branches: [ master ]
+    branches: [ master, v1, v2-beta ]
 
 jobs:
   build:
@@ -12,7 +12,7 @@ jobs:
     
     steps:
     - uses: actions/checkout@v1
-    - name: Send dispatch event
+    - name: Send a dispatch event
       run: |
           curl -X POST https://api.github.com/repos/MicrosoftOryx/githubactions-samples/dispatches -H 'Accept: application/vnd.github.everest-preview+json' -H 'Authorization: token ${{secrets.REPO_ACCESS_TOKEN}}' --data '{"event_type": "build_application"}'
 
