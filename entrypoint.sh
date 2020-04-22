@@ -77,7 +77,7 @@ if [ -z "$ORYX_DISABLE_TELEMETRY" ] || [ "$ORYX_DISABLE_TELEMETRY" == "false" ];
     export GITHUB_ACTIONS_BUILD_IMAGE_PULL_END_TIME=$endTime
 fi
 
-export ORYX_SDK_STORAGE_BASE_URL="https://oryxsdk-cdn.azureedge.net"
+export ORYX_SDK_STORAGE_BASE_URL="https://oryx-cdn.microsoft.io"
 
 echo
 echo "Running command '$oryxCommand'"
