@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/oryx/build:20200312.2
+FROM mcr.microsoft.com/oryx/build:github-actions-20200421.4
 
 COPY entrypoint.sh /entrypoint.sh
 
