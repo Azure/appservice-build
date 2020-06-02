@@ -56,9 +56,9 @@ jobs:
         uses: azure/appservice-build@v1
         with:
           platform: <PLATFORM_NAME>
-            platform-version: <PLATFORM_VERSION>
-            source-directory: <SOURCE_DIR>
-            output-directory: <OUTPUT_DIR>
+          platform-version: <PLATFORM_VERSION>
+          source-directory: <SOURCE_DIR>
+          output-directory: <OUTPUT_DIR>
 ```
 
 ### Sample workflow to build and deploy an Azure Web App
