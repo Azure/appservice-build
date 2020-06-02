@@ -23,7 +23,7 @@ If you are looking for a GitHub Action to deploy your Azure Web App, consider us
 
 The definition of this GitHub Action is in [`action.yml`](./action.yml).
 
-Now we have a beta version [`v2-beta`](https://github.com/Azure/appservice-build/tree/v2-beta) released. It's using a [`new image specifically for GitHub Actions`](https://github.com/microsoft/Oryx/blob/master/images/build/GitHubActions.Dockerfile
+Now we have a beta version [`v2-beta`](https://github.com/Azure/appservice-build/tree/v2-beta) released. It's using a [`new dockerfile for GitHub Actions`](https://github.com/microsoft/Oryx/blob/master/images/build/GitHubActions.Dockerfile
 ) to significantly reduce the time for building your app.
 
 # End-to-End Sample Workflows
@@ -54,6 +54,11 @@ jobs:
 
       - name: Building web app
         uses: azure/appservice-build@v1
+        with:
+          platform: <PLATFORM_NAME>
+            platform-version: <PLATFORM_VERSION>
+            source-directory: <SOURCE_DIR>
+            output-directory: <OUTPUT_DIR>
 ```
 
 ### Sample workflow to build and deploy an Azure Web App
@@ -72,6 +77,11 @@ jobs:
 
       - name: Building web app
         uses: azure/appservice-build@v1
+        with:
+          platform: <PLATFORM_NAME>
+          platform-version: <PLATFORM_VERSION>
+          source-directory: <SOURCE_DIR>
+          output-directory: <OUTPUT_DIR>
 
       - name: Deploying web app to Azure
         uses: azure/webapps-deploy@v1
@@ -81,6 +91,23 @@ jobs:
 ```
 
 The following variable should be replaced in your workflow:
+
+- `<PLATFORM_NAME>`
+    - Programming platform used by the web app that's being deployed, **optional**.
+
+- `<PLATFORM_VERSION>`
+    - Version of programming platform used by the web app, **optional**.
+    - Default version of each platform if not set:
+      - .NET Core 3.1
+      - Node 12.16
+      - PHP 7.3
+      - Python 3.8
+
+- `<SOURCE_DIR>`
+    - Relative path (within the repo) to the source directory of the web app that's being deployed, **optional**.
+
+- `<OUTPUT_DIR>`
+    - Directory where the build output has to be put, **optional**.
 
 - `<WEB_APP_NAME>`
     - Name of the web app that's being deployed
@@ -93,6 +120,12 @@ The following variable should be set in the GitHub repository's secrets store:
 # Privacy
 
 For more information about Microsoft's privacy policy, please see the [`PRIVACY.md`](./PRIVACY.md) file.
+
+# Security
+
+Microsoft takes the security of our software products and services seriously, which includes all source code repositories managed through our GitHub organizations, which include [Microsoft](https://github.com/Microsoft), [Azure](https://github.com/Azure), [DotNet](https://github.com/dotnet), [AspNet](https://github.com/aspnet), [Xamarin](https://github.com/xamarin), and [our GitHub organizations](https://opensource.microsoft.com/).
+
+For more information about Microsoft's privacy policy, please see the [`SECURITY.md`](./SECURITY.md) file.
 
 ## Disable Data Collection
 
@@ -108,3 +141,7 @@ To disable this GitHub Action from collecting any data, please set the environme
 # Contributing
 
 For more information on contributing to this project, please see the [`CONTRIBUTING.md`](./CONTRIBUTING.md) file.
+
+# License
+
+For more information on contributing to this project, please see the [`LICENSE.md`](./LICENSE.md) file.
