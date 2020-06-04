@@ -26,7 +26,7 @@ If you are looking for a GitHub Action to deploy your Azure Web App, consider us
 
 The definition of this GitHub Action is in [`action.yml`](./action.yml).
 
-Now we have a beta version [`v2-beta`](https://github.com/Azure/appservice-build/tree/v2-beta) released. It's using a [`new dockerfile for GitHub Actions`](https://github.com/microsoft/Oryx/blob/master/images/build/GitHubActions.Dockerfile
+V2 version [`v2`](https://github.com/Azure/appservice-build/tree/v2) is released. It's using a [`new dockerfile for GitHub Actions`](https://github.com/microsoft/Oryx/blob/master/images/build/GitHubActions.Dockerfile
 ) to significantly reduce the time for building your app.
 
 # End-to-End Sample Workflows
@@ -56,7 +56,7 @@ jobs:
         uses: actions/checkout@v1
 
       - name: Building web app
-        uses: azure/appservice-build@v1
+        uses: azure/appservice-build@v2
         with:
           platform: <PLATFORM_NAME>
           platform-version: <PLATFORM_VERSION>
@@ -79,7 +79,7 @@ jobs:
         uses: actions/checkout@v1
 
       - name: Building web app
-        uses: azure/appservice-build@v1
+        uses: azure/appservice-build@v2
         with:
           platform: <PLATFORM_NAME>
           platform-version: <PLATFORM_VERSION>
@@ -100,7 +100,8 @@ The following variable should be replaced in your workflow:
 
 - `<PLATFORM_VERSION>`
     - Version of programming platform used by the web app, **optional**.
-    - Default version of each platform if not set:
+    - Oryx will determine the version from source files if version was not set.
+    - Default version of each platform if version was not set and Oryx couldn't determine version :
       - .NET Core 3.1
       - Node 12.16
       - PHP 7.3
@@ -136,7 +137,7 @@ To disable this GitHub Action from collecting any data, please set the environme
 
 ```
 - name: Building web app
-  uses: azure/appservice-build@v1
+  uses: azure/appservice-build@v2
   env:
     ORYX_DISABLE_TELEMETRY: true
 ```
