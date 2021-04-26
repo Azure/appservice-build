@@ -67,7 +67,7 @@ else
 fi
 
 if [ -z "$ORYX_DISABLE_TELEMETRY" ] || [ "$ORYX_DISABLE_TELEMETRY" == "false" ]; then
-    url="https://api.github.com/repos/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}/jobs"
+    url="${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}/jobs"
     jobs=$(curl -X GET "${url}")
     appserviceBuildJob=${jobs#*Build*/appservice-build@*,}
     startedAtTime=$(echo "${appserviceBuildJob}" | sed 's/,/\n/g' | grep "started_at" | awk '{print $2}' | sed -n '1p' | tr -d '"')
