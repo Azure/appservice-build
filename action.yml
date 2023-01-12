@@ -2,16 +2,22 @@ name: 'App Service Web App Build Action'
 description: 'Build an Azure Web App on Linux using the Oryx build system.'
 inputs:
   source-directory:
-    description: 'Relative path (within the repository) to the source directory of the project you want to build; if no value is provided for this, the root of the repository ("GITHUB_WORKSPACE" environment variable) will be built.'
+    description: |
+      'Relative path (within the repository) to the source directory of the project you want to build; if no value is
+      provided for this, the root of the repository ("GITHUB_WORKSPACE" environment variable) will be built.'
     required: false
   platform:
-    description: 'Programming platform used to build the web app; if no value is provided, Oryx will determine the platform to build with. The supported values are "dotnet", "nodejs", "php" and "python".'
+    description: |
+      'Programming platform used to build the web app; if no value is provided, Oryx will determine the platform to
+      build with. Supported values: dotnet, golang, java, nodejs, php, python, ruby'
     required: false
   platform-version:
-    description: 'Version of the programming platform used to build the web app; if no value is provided, Oryx will determine the version needed to build the repository.'
+    description: |
+      'Version of the programming platform used to build the web app; if no value is provided, Oryx will determine the
+      version needed to build the repository.'
     required: false
   output-directory:
-    description: 'The directory where the build output has to be put.'
+    description: 'The directory where the build output will be copied to.'
     required: false
 branding:
   icon: 'login.svg'

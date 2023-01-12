@@ -74,6 +74,7 @@ if [ -z "$ORYX_DISABLE_TELEMETRY" ] || [ "$ORYX_DISABLE_TELEMETRY" == "false" ];
     completedAtTime=$(echo "${appserviceBuildJob}" | sed 's/,/\n/g' | grep "completed_at" | awk '{print $2}' | sed -n '1p' | tr -d '"')
     export GITHUB_ACTIONS_BUILD_IMAGE_PULL_START_TIME="$startedAtTime"
     export GITHUB_ACTIONS_BUILD_IMAGE_PULL_END_TIME="$completedAtTime"
+    export CALLER_ID="appservice-build-github-action-v3"
 fi
 
 echo
