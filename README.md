@@ -1,33 +1,33 @@
 # GitHub Action for building Azure Web Apps
 
-![V1_BuildAndDeploy_PythonApp_ToAzureWebApp](https://github.com/MicrosoftOryx/githubactions-samples/workflows/V1_BuildAndDeploy_PythonApp_ToAzureWebApp/badge.svg?branch=master)
-![V1_BuildAndDeploy_PhpApp_ToAzureWebApp](https://github.com/MicrosoftOryx/githubactions-samples/workflows/V1_BuildAndDeploy_PhpApp_ToAzureWebApp/badge.svg?branch=master)
-![V1_BuildAndDeploy_NodeApp_ToAzureWebApp](https://github.com/MicrosoftOryx/githubactions-samples/workflows/V1_BuildAndDeploy_NodeApp_ToAzureWebApp/badge.svg?branch=master)
-![V1_BuildAndDeploy_AspNetCoreApp_ToAzureWebApp](https://github.com/MicrosoftOryx/githubactions-samples/workflows/V1_BuildAndDeploy_AspNetCoreApp_ToAzureWebApp/badge.svg?branch=master)
-![V2Beta_BuildAndDeploy_PythonApp_ToAzureWebApp](https://github.com/MicrosoftOryx/githubactions-samples/workflows/V2Beta_BuildAndDeploy_PythonApp_ToAzureWebApp/badge.svg?branch=master)
-![V2Beta_BuildAndDeploy_NodeApp_ToAzureWebApp](https://github.com/MicrosoftOryx/githubactions-samples/workflows/V2Beta_BuildAndDeploy_NodeApp_ToAzureWebApp/badge.svg?branch=master)
-![V2Beta_BuildAndDeploy_AspNetCoreApp_ToAzureWebApp](https://github.com/MicrosoftOryx/githubactions-samples/workflows/V2Beta_BuildAndDeploy_AspNetCoreApp_ToAzureWebApp/badge.svg?branch=master)
-![V2_BuildAndDeploy_AspNetCoreReactApp_ToAzureWebApp](https://github.com/MicrosoftOryx/githubactions-samples/workflows/V2_BuildAndDeploy_AspNetCoreReactApp_ToAzureWebApp/badge.svg?branch=master)
-
-With the Azure App Service Actions for GitHub, you can automate your workflow to deploy [Azure Web Apps](https://azure.microsoft.com/en-us/services/app-service/web/) using GitHub Actions.
-
-Get started today with a [free Azure account](https://azure.com/free/open-source)!
+With the Azure App Service Actions for GitHub, you can automate your workflow to deploy
+[Azure Web Apps](https://azure.microsoft.com/en-us/services/app-service/web/) using GitHub Actions.
 
 A repo for [Sample apps and sample workflows](https://github.com/MicrosoftOryx/githubactions-samples).
 
-This repository contains the GitHub Action for [building Azure Web Apps on Linux](./action.yml) using the [Oryx](https://github.com/microsoft/Oryx) build system. Currently, the following platforms can be built using this GitHub Action:
+This repository contains the GitHub Action for [building Azure Web Apps on Linux](./action.yml) using the
+[Oryx](https://github.com/microsoft/Oryx) build system. Currently, the following platforms can be built using this
+GitHub Action:
 
+- Golang
+- Java
 - .NET Core
 - Node
 - PHP
 - Python
+- Ruby
 
-If you are looking for a GitHub Action to deploy your Azure Web App, consider using [`azure/webapps-deploy`](https://github.com/Azure/webapps-deploy).
+_Note_: as this list may become out of date, please refer to
+[this document](https://github.com/microsoft/Oryx/blob/main/doc/supportedPlatformVersions.md) in the Oryx repository for
+a more accurate list of platforms and their versions that can be built.
+
+If you are looking for a GitHub Action to deploy your Azure Web App, consider using
+[`azure/webapps-deploy`](https://github.com/Azure/webapps-deploy).
+
+If you are looking for a GitHub Action to build and deploy Azure Container Apps, consider using
+[`azure/container-apps-deploy-action`](https://github.com/Azure/container-apps-deploy-action)
 
 The definition of this GitHub Action is in [`action.yml`](./action.yml).
-
-V2 version [`v2`](https://github.com/Azure/appservice-build/tree/v2) is released. It's using a [`new dockerfile for GitHub Actions`](https://github.com/microsoft/Oryx/blob/master/images/build/GitHubActions.Dockerfile
-) to significantly reduce the time for building your app.
 
 # End-to-End Sample Workflows
 
@@ -40,6 +40,9 @@ V2 version [`v2`](https://github.com/Azure/appservice-build/tree/v2) is released
 
 - [`azure/webapps-deploy`](https://github.com/Azure/webapps-deploy)
   - Deploy a web app to Azure
+
+- [`azure/container-apps-deploy-action`](https://github.com/Azure/container-apps-deploy-action)
+  - Build and deploy an Azure Container App
 
 ### Sample workflow to build a web app
 
@@ -56,7 +59,7 @@ jobs:
         uses: actions/checkout@v1
 
       - name: Building web app
-        uses: azure/appservice-build@v2
+        uses: azure/appservice-build@v3
         with:
           platform: <PLATFORM_NAME>
           platform-version: <PLATFORM_VERSION>
@@ -66,7 +69,8 @@ jobs:
 
 ### Sample workflow to build and deploy an Azure Web App
 
-The following is a sample workflow that builds a web app in a repository and then deploys it to Azure whenever a commit is pushed:
+The following is a sample workflow that builds a web app in a repository and then deploys it to Azure whenever a commit
+is pushed:
 
 ```
 on: push
@@ -79,7 +83,7 @@ jobs:
         uses: actions/checkout@v1
 
       - name: Building web app
-        uses: azure/appservice-build@v2
+        uses: azure/appservice-build@v3
         with:
           platform: <PLATFORM_NAME>
           platform-version: <PLATFORM_VERSION>
@@ -93,33 +97,41 @@ jobs:
           publish-profile: ${{ secrets.AZURE_WEB_APP_PUBLISH_PROFILE }}
 ```
 
-The following variable should be replaced in your workflow:
-
-- `<PLATFORM_NAME>`
-    - Programming platform used by the web app that's being deployed, **optional**.
-
-- `<PLATFORM_VERSION>`
-    - Version of programming platform used by the web app, **optional**.
-    - Oryx will determine the version from source files if version was not set.
-    - Default version of each platform if version was not set and Oryx couldn't determine version :
-      - .NET Core 3.1
-      - Node 12.16
-      - PHP 7.3
-      - Python 3.8
-
-- `<SOURCE_DIR>`
-    - Relative path (within the repo) to the source directory of the web app that's being deployed, **optional**.
-
-- `<OUTPUT_DIR>`
-    - Directory where the build output has to be put, **optional**.
+The following variables should be replaced in your workflow:
 
 - `<WEB_APP_NAME>`
-    - Name of the web app that's being deployed
+  - Name of the web app that's being deployed
+  - **Required** - Used _only_ for the `azure/webapps-deploy` GitHub Action
+
+- `<PLATFORM_NAME>`
+  - Programming platform used by the web app that's being deployed
+  - **Optional** - Oryx will detect the provided application's platform if not provided
+
+- `<PLATFORM_VERSION>`
+  - Version of programming platform used by the web app
+  - **Optional** - Oryx will determine the version from source files if version was not set.
+  - The following are the default versions used per platform if a version cannot be detected by Oryx:
+    - [Golang](https://github.com/microsoft/Oryx/blob/main/platforms/golang/versions/bullseye/defaultVersion.txt)
+    - [Java](https://github.com/microsoft/Oryx/blob/main/platforms/java/versions/bullseye/defaultVersion.txt)
+    - [.NET](https://github.com/microsoft/Oryx/blob/main/platforms/dotnet/versions/bullseye/defaultVersion.txt)
+    - [Node](https://github.com/microsoft/Oryx/blob/main/platforms/nodejs/versions/bullseye/defaultVersion.txt)
+    - [PHP](https://github.com/microsoft/Oryx/blob/main/platforms/php/versions/bullseye/defaultVersion.txt)
+    - [Python](https://github.com/microsoft/Oryx/blob/main/platforms/python/versions/bullseye/defaultVersion.txt)
+    - [Ruby](https://github.com/microsoft/Oryx/blob/main/platforms/ruby/versions/bullseye/defaultVersion.txt)
+
+- `<SOURCE_DIR>`
+  - Relative path (within the repo) to the source directory of the web app that's being deployed
+  - **Optional** - The value of `GITHUB_WORKSPACE` environment variable will be used if not provided
+
+- `<OUTPUT_DIR>`
+  - The directory where the build output will be copied to
+  - **Optional** - The build output will not be copied to a separate directory if not provided
 
 The following variable should be set in the GitHub repository's secrets store:
 
 - `AZURE_WEB_APP_PUBLISH_PROFILE`
-    - The contents of the publish profile file (`.publishsettings`) used to deploy the web app; for more information on setting this secret, please see the [`azure/webapps-deploy`](https://github.com/Azure/webapps-deploy) action
+    - The contents of the publish profile file (`.publishsettings`) used to deploy the web app; for more information on
+    setting this secret, please see the [`azure/webapps-deploy`](https://github.com/Azure/webapps-deploy) action
 
 # Privacy
 
@@ -127,17 +139,21 @@ For more information about Microsoft's privacy policy, please see the [`PRIVACY.
 
 # Security
 
-Microsoft takes the security of our software products and services seriously, which includes all source code repositories managed through our GitHub organizations, which include [Microsoft](https://github.com/Microsoft), [Azure](https://github.com/Azure), [DotNet](https://github.com/dotnet), [AspNet](https://github.com/aspnet), [Xamarin](https://github.com/xamarin), and [our GitHub organizations](https://opensource.microsoft.com/).
+Microsoft takes the security of our software products and services seriously, which includes all source code
+repositories managed through our GitHub organizations, which include [Microsoft](https://github.com/Microsoft),
+[Azure](https://github.com/Azure), [DotNet](https://github.com/dotnet), [AspNet](https://github.com/aspnet),
+[Xamarin](https://github.com/xamarin), and [our GitHub organizations](https://opensource.microsoft.com/).
 
 For more information about Microsoft's privacy policy, please see the [`SECURITY.md`](./SECURITY.md) file.
 
 ## Disable Data Collection
 
-To disable this GitHub Action from collecting any data, please set the environment variable `ORYX_DISABLE_TELEMETRY` to `true`, as seen below:
+To disable this GitHub Action from collecting any data, please set the environment variable `ORYX_DISABLE_TELEMETRY` to
+`true`, as seen below:
 
 ```
 - name: Building web app
-  uses: azure/appservice-build@v2
+  uses: azure/appservice-build@v3
   env:
     ORYX_DISABLE_TELEMETRY: true
 ```
