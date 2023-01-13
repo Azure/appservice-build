@@ -17,6 +17,10 @@ GitHub Action:
 - Python
 - Ruby
 
+_Note_: as this list may become out of date, please refer to
+[this document](https://github.com/microsoft/Oryx/blob/main/doc/supportedPlatformVersions.md) in the Oryx repository for
+a more accurate list of platforms and their versions that can be built.
+
 If you are looking for a GitHub Action to deploy your Azure Web App, consider using
 [`azure/webapps-deploy`](https://github.com/Azure/webapps-deploy).
 
@@ -95,6 +99,10 @@ jobs:
 
 The following variables should be replaced in your workflow:
 
+- `<WEB_APP_NAME>`
+  - Name of the web app that's being deployed
+  - **Required** - Used _only_ for the `azure/webapps-deploy` GitHub Action
+
 - `<PLATFORM_NAME>`
   - Programming platform used by the web app that's being deployed
   - **Optional** - Oryx will detect the provided application's platform if not provided
@@ -103,13 +111,13 @@ The following variables should be replaced in your workflow:
   - Version of programming platform used by the web app
   - **Optional** - Oryx will determine the version from source files if version was not set.
   - The following are the default versions used per platform if a version cannot be detected by Oryx:
-    - Golang 1.18
-    - Java 11
-    - .NET 6.0
-    - Node 16
-    - PHP 8.0
-    - Python 3.8
-    - Ruby 2.7
+    - [Golang](https://github.com/microsoft/Oryx/blob/main/platforms/golang/versions/bullseye/defaultVersion.txt)
+    - [Java](https://github.com/microsoft/Oryx/blob/main/platforms/java/versions/bullseye/defaultVersion.txt)
+    - [.NET](https://github.com/microsoft/Oryx/blob/main/platforms/dotnet/versions/bullseye/defaultVersion.txt)
+    - [Node](https://github.com/microsoft/Oryx/blob/main/platforms/nodejs/versions/bullseye/defaultVersion.txt)
+    - [PHP](https://github.com/microsoft/Oryx/blob/main/platforms/php/versions/bullseye/defaultVersion.txt)
+    - [Python](https://github.com/microsoft/Oryx/blob/main/platforms/python/versions/bullseye/defaultVersion.txt)
+    - [Ruby](https://github.com/microsoft/Oryx/blob/main/platforms/ruby/versions/bullseye/defaultVersion.txt)
 
 - `<SOURCE_DIR>`
   - Relative path (within the repo) to the source directory of the web app that's being deployed
@@ -118,10 +126,6 @@ The following variables should be replaced in your workflow:
 - `<OUTPUT_DIR>`
   - The directory where the build output will be copied to
   - **Optional** - The build output will not be copied to a separate directory if not provided
-
-- `<WEB_APP_NAME>`
-  - Name of the web app that's being deployed
-  - Used _only_ for the `azure/webapps-deploy` GitHub Action
 
 The following variable should be set in the GitHub repository's secrets store:
 
